@@ -1,13 +1,22 @@
 'use client'
 import React, {useState} from "react"
 import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 export const ProductCart = ({product, onDeleteProduct}) => {
+    const showDescriptionModal = () => {
+        withReactContent(Swal).fire({
+            title: product.title,
+            text: product.description,
+            icon: 'info'
+        })
+    }
+
     return (
         <>
             <div className="cart-product">
                 <figure>
-                    <img src={product.urlImage} alt={product.title} title={product.description} />
+                    <img src={product.urlImage} alt={product.title} onClick={showDescriptionModal} />
                 </figure>
                 <div className="info-cart-product">
                     <span className="cantidad-producto-carrito">
