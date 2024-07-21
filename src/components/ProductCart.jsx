@@ -10,11 +10,26 @@ export const ProductCart = ({product, onDeleteProduct}) => {
             text: product.description,
             icon: 'info'
         })
-    }
+    };
+
+    const confirmDeleteProduct = () => {
+        withReactContent(Swal).fire({
+            html: '<p>¿Estás seguro de eliminar <b>'+product.title+'</b> de tu carrito de compras?</p>',
+            //text: '',
+            icon: 'warning',
+            showCancelButton: true
+        }).then((result) => {
+            if(result.isConfirmed){
+                onDeleteProduct(product)
+            }
+        });
+
+        
+    };
 
     return (
         <>
-            <div className="cart-product">
+            <div className="cart-product" key={product.id}>
                 <figure>
                     <img src={product.urlImage} alt={product.title} onClick={showDescriptionModal} />
                 </figure>
@@ -29,7 +44,7 @@ export const ProductCart = ({product, onDeleteProduct}) => {
                         {product.price}
                     </span>
                 </div>
-                <img src="https://static.vecteezy.com/system/resources/previews/018/887/462/original/signs-close-icon-png.png" alt="cerrar" className="icon-close" onClick={() => onDeleteProduct(product)} />
+                <img src="https://static.vecteezy.com/system/resources/previews/018/887/462/original/signs-close-icon-png.png" alt="cerrar" className="icon-close" onClick={confirmDeleteProduct} />
             </div>
         </>
     )

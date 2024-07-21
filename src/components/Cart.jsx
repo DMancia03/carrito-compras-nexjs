@@ -1,6 +1,8 @@
 'use client'
 import React, {useState} from "react"
 import { ProductCart } from "./ProductCart"
+import Swal from "sweetalert2"
+import withReactContent from "sweetalert2-react-content"
 
 export const Cart = ({allProducts, total, onCleanCart, active, onDeleteProduct}) => {
     return (
